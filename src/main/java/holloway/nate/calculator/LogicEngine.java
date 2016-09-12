@@ -6,7 +6,6 @@ package holloway.nate.calculator;
  class LogicEngine {
     CoreCalculator calc;
     Display display;
-    Memory memory;
     ScientificCalculator scientificCalculator;
     State state;
     UserInterface ui;
@@ -14,7 +13,6 @@ package holloway.nate.calculator;
     LogicEngine(){
         calc = new CoreCalculator();
         display = new Display();
-        memory = new Memory();
         scientificCalculator = new ScientificCalculator();
         state = new State(State.Mode.CORE);
         ui = new UserInterface();

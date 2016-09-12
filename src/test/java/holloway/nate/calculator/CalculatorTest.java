@@ -10,6 +10,10 @@ public class CalculatorTest {
 
     @Test
     public void addTest(){
+        CoreCalculator calculator = new CoreCalculator();
+        double actual = calculator.add(4,60);
+        double expected = 64;
+        Assert.assertSame("These two should be the same",expected,actual);
 
     }
 
@@ -20,5 +24,14 @@ public class CalculatorTest {
         State.Mode actual = newState.getStateValue();
         State.Mode expected = State.Mode.CORE;
         Assert.assertSame(expected,actual);
+    }
+
+    @Test
+    public void subtractTest(){
+        CoreCalculator calculator = new CoreCalculator();
+        double actual = calculator.subtract(40,6);
+        double expected = 34;
+        Assert.assertSame("These two should be the same",expected,actual);
+
     }
 }
