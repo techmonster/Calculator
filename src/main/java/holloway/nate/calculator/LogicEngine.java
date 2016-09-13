@@ -4,16 +4,10 @@ package holloway.nate.calculator;
  * Created by nathanielholloway on 9/12/16.
  */
  class LogicEngine {
-    CoreCalculator calc;
-    Display display;
-    ScientificCalculator scientificCalculator;
-    State state;
-    UserInterface ui;
+    private State state;
+    private UserInterface ui;
 
     LogicEngine(){
-        calc = new CoreCalculator();
-        display = new Display();
-        scientificCalculator = new ScientificCalculator();
         state = new State(State.Mode.CORE);
         ui = new UserInterface();
     }

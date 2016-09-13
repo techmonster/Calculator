@@ -3,7 +3,17 @@ package holloway.nate.calculator;
 /**
  * Created by nathanielholloway on 9/12/16.
  */
+
 public class CoreCalculator {
+
+    String greeting = "Enter 'A' for addition, 'S' for subtraction" +
+            " 'M' to multiply, 'D' to divide\n" +
+            "'T' to square a number, 'X' to calculate variable exponentiation, 'R' to find the root" +
+            ", 'I' for the inverse of the number displayed, and 'Q' to quit ";
+
+    public CoreCalculator(){
+
+    }
 
 
     double add(double number1 ,double number2){
