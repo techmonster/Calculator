@@ -5,7 +5,7 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.Parser;
 /**
  * Created by nathanielholloway on 9/12/16.
  */
-public class Memory {
+public class MemoryModel {
 
     private double displayValue;
     private double memoryValue;
@@ -14,37 +14,23 @@ public class Memory {
             "without using memory";
 
     private Display calcDisplay;
-    public Memory(){
+    public MemoryModel(){
         displayValue = 0;
         memoryValue = 0;
         calcDisplay = new Display();
     }
 
-    public double getDisplayValue(){
-        return displayValue;
-    }
-    public void setDisplayValue(double displayValue){
-        this.displayValue = displayValue;
-    }
+    private void setMemoryValue(double memoryValue){ this.memoryValue = memoryValue;}
+    private void resetMemoryValue(){ memoryValue = 0;}
+    private void setDisplayValueToMemoryValue(){ displayValue = memoryValue;}
 
-    public void setMemoryValue(double memoryValue){
-        this.memoryValue = memoryValue;
-    }
 
-    public void resetMemoryValue(){
-        memoryValue = 0;
-    }
+    public String getMemoryOperationsPrompt() { return memoryOperations;}
 
-    public void setDisplayValueToMemoryValue(){
-        displayValue = memoryValue;
-    }
-
-    public String getMemoryOperationsPrompt() {
-        return memoryOperations;
-    }
+    public void setDisplayValue(double displayValue){ this.displayValue = displayValue;}
 
     public void MPlus(){
-        memoryValue += getDisplayValue();
+        setMemoryValue(memoryValue + displayValue);
         setDisplayValue(memoryValue);
         calcDisplay.print(""+memoryValue);
     }

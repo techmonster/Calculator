@@ -6,13 +6,13 @@ import java.util.Scanner;
  * Created by nathanielholloway on 9/12/16.
  * The user interface for my calculator.
  */
- class UserInterface {
+ class Controller {
     private Scanner sc;
-    private CoreCalculator calculator;
-    private ScientificCalculator scientificCalculator;
+    private CoreCalculatorModel calculator;
+    private ScientificCalculatorModel scientificCalculator;
     private Display newDisplay;
     private State thisState;
-    private Memory memory;
+    private MemoryModel memory;
     private int count;
     public boolean quit = false;
     private String programGreeting = "What do you want to do?\n" +
@@ -20,13 +20,13 @@ import java.util.Scanner;
             "2) Scientific math\n" +
             "3) Quit";
 
-    public UserInterface() {
+    public Controller() {
         sc = new Scanner(System.in);
-        calculator = new CoreCalculator();
-        scientificCalculator = new ScientificCalculator();
+        calculator = new CoreCalculatorModel();
+        scientificCalculator = new ScientificCalculatorModel();
         newDisplay = new Display();
         thisState = new State();
-        memory = new Memory();
+        memory = new MemoryModel();
         count = 0;
     }
 
@@ -61,12 +61,10 @@ import java.util.Scanner;
     }
 
     private void getCoreCalculatorAnswers() {
-        ScientificCalculator.DisplayMode thisMode = scientificCalculator.currentDisplayMode;
-        int response;
+        ScientificCalculatorModel.DisplayMode thisMode = scientificCalculator.currentDisplayMode;
         Character userSelection;
         String displayModeAnswer="";
         double answer = 0;
-        int pressedEnter = 1;
 
         newDisplay.print(calculator.greeting);
         userSelection = sc.next().toUpperCase().charAt(0);
@@ -74,26 +72,15 @@ import java.util.Scanner;
         print(answer);
 
         newDisplay.print("Do you want to switch your display?\n'Y' or 'N'");
-        displayModeAnswer = sc.next();
+            displayModeAnswer = sc.next();
+
         if(displayModeAnswer.toUpperCase().equals("Y")){
-            newDisplay.print("Do you want to 1)Cycle through options or \nAny other number to Enter a string?");
-            response = sc.nextInt();
-            if(response==1){
-                while (pressedEnter == 1) {
-                    newDisplay.print("Press 1) to cycle \nAny other number to quit");
-                    thisMode = scientificCalculator.switchDisplayMode();
-                    newDisplay.print(thisMode.toString());
-                    pressedEnter = sc.nextInt();
-                }
-            }else {
-                newDisplay.print("Enter Binary, Octal, Decimal or Hex");
-                displayModeAnswer = sc.next();
-                thisMode = scientificCalculator.switchDisplayMode(displayModeAnswer);
-            }
+            //switchDisplayModeOptions
+            thisMode = switchDisplayModeOptions();
             getAnswerInDisplayMode(thisMode, answer);
             }
         else {
-            displayModeAnswer = ScientificCalculator.DisplayMode.DECIMAL.toString();
+            displayModeAnswer = ScientificCalculatorModel.DisplayMode.DECIMAL.toString();
             getAnswerInDisplayMode(scientificCalculator.switchDisplayMode(displayModeAnswer), answer);
 
         }
@@ -104,7 +91,7 @@ import java.util.Scanner;
         String userSelection;
         double answer = 0;
         quit = false;
-        int memoryAnswer = 4;
+        int memoryAnswer = 1;
 
                 newDisplay.print(calculator.greeting);
                 newDisplay.print(scientificCalculator.greeting);
@@ -114,13 +101,19 @@ import java.util.Scanner;
 
                     answer = switchScientificFunctions(Integer.valueOf(userSelection));
                     print(answer);
-                    memory.getDisplayValue();
-                    while(memoryAnswer!=2) {
-                        newDisplay.print("Do you want to change the Trig display mode?\n 1)Yes\n 2)NO ");
-                        memoryAnswer = sc.nextInt();
+                    while(memoryAnswer==1) {
+                        newDisplay.print("Do you want to change the Trig Units display mode?\n 1)Yes\n 2)NO ");
+                        userSelection = sc.next();
+                        if(Character.isDigit(userSelection.charAt(0)))
+                        {
+                            memoryAnswer = Integer.valueOf(userSelection);
+                        }
+                        else {
+                            break;
+                        }
                         if(memoryAnswer==1){
                             scientificCalculator.switchUnitsMode();
-                            answer = scientificCalculator.currentUnitsMode.equals(ScientificCalculator.UnitsMode.DEGREES) ?  Math.toRadians(answer): Math.toDegrees(answer);
+                            answer = scientificCalculator.currentUnitsMode.equals(ScientificCalculatorModel.UnitsMode.DEGREES) ?  Math.toRadians(answer): Math.toDegrees(answer);
                             newDisplay.print(scientificCalculator.currentUnitsMode.toString());
                             print(answer);
                         }
@@ -206,7 +199,14 @@ import java.util.Scanner;
 
         while(answer!=2.0) {
             newDisplay.print("Do you want to change the Trig display mode?\n 1)Yes\n 2)NO ");
-            answer = sc.nextDouble();
+            displayAnswer =sc.next();
+            if(Character.isDigit(displayAnswer.charAt(0))) {
+                answer = Double.valueOf(displayAnswer);
+            }else {
+                answer = 2.0;
+                break;
+            }
+
             if (answer == 1.0) {
                 newDisplay.print(scientificCalculator.getUnitsModeMsg());
                 newDisplay.print("Type 'Degrees' or 'Radians' ");
@@ -214,7 +214,6 @@ import java.util.Scanner;
                 newDisplay.changeTrigDisplay(displayAnswer);
             }
         }
-        newDisplay.changeTrigDisplay(scientificCalculator.getUnitsModeMsg());
         switch(functions){
             case 1:
                 newDisplay.print("Please enter a number to determine it's sine");
@@ -318,7 +317,7 @@ import java.util.Scanner;
         }
     }
 
-    private void getAnswerInDisplayMode(ScientificCalculator.DisplayMode mode, Double answer){
+    private void getAnswerInDisplayMode(ScientificCalculatorModel.DisplayMode mode, Double answer){
 
         switch (mode){
             case BINARY:
@@ -336,7 +335,31 @@ import java.util.Scanner;
             default:
                 print(answer);
         }
+    }
 
+    private CoreCalculatorModel.DisplayMode switchDisplayModeOptions(){
+        CoreCalculatorModel.DisplayMode displayMode = scientificCalculator.currentDisplayMode;
+        int response;
+        String displayModeAnswer;
+
+
+
+        newDisplay.print("Do you want to 1)Cycle through options or \nAny other number to Enter a string?");
+        response = sc.nextInt();
+        if(response==1){
+            while (response== 1) {
+                newDisplay.print("Press 1) to cycle \nAny other number to quit");
+                displayMode = scientificCalculator.switchDisplayMode();
+                newDisplay.print(displayMode.toString());
+                response = sc.nextInt();
+            }
+        }else {
+            newDisplay.print("Enter Binary, Octal, Decimal or Hex");
+            displayModeAnswer = sc.next();
+            displayMode = scientificCalculator.switchDisplayMode(displayModeAnswer);
+        }
+
+        return displayMode;
     }
 
 }

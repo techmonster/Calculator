@@ -3,20 +3,16 @@ package holloway.nate.calculator;
 /**
  * Created by nathanielholloway on 9/12/16.
  */
-public class ScientificCalculator extends CoreCalculator{
+public class ScientificCalculatorModel extends CoreCalculatorModel {
 
-    static int displayMode = 0;
 
-    public enum DisplayMode{BINARY, OCTAL, DECIMAL, HEX}
-    DisplayMode currentDisplayMode;
-
-    public enum UnitsMode{DEGREES, RADIANS}
+    public enum UnitsMode{DEGREES, RADIANS}                 //Only a feature of the Scientific calculator class
     UnitsMode currentUnitsMode;
     static int unitsMode = 0;
     String unitsModeMsg;
     String greeting;
 
-    ScientificCalculator() {
+    ScientificCalculatorModel() {
         currentDisplayMode = DisplayMode.DECIMAL;
         currentUnitsMode = UnitsMode.DEGREES;
         unitsModeMsg = "How would you like this displayed?";
@@ -45,7 +41,7 @@ public class ScientificCalculator extends CoreCalculator{
 
     double inverseNaturalLog(double x){return Math.exp(x);}
 
-    double cube(double x){return x*x*x;}
+    double cube(double x){return x * x * x;}
 
     double cubeRoot(double x){return Math.cbrt(x);}
 
@@ -58,47 +54,6 @@ public class ScientificCalculator extends CoreCalculator{
         return answer;
     }
 
-    DisplayMode switchDisplayMode(){
-
-        displayMode=displayMode%4+1;
-        switch (displayMode){
-            case 1:
-                currentDisplayMode = DisplayMode.BINARY;
-                break;
-            case 2:
-                currentDisplayMode = DisplayMode.OCTAL;
-                break;
-            case 3:
-                currentDisplayMode = DisplayMode.DECIMAL;
-                break;
-            case 4:
-                currentDisplayMode = DisplayMode.HEX;
-                break;
-        }
-        return currentDisplayMode;
-    }
-
-    DisplayMode switchDisplayMode(String mode){
-
-        switch (mode.toUpperCase().charAt(0)){
-            case 'B':
-                currentDisplayMode = DisplayMode.BINARY;
-
-                break;
-            case 'O':
-                currentDisplayMode = DisplayMode.OCTAL;
-                break;
-            case 'D':
-                currentDisplayMode = DisplayMode.DECIMAL;
-                break;
-            case 'H':
-                currentDisplayMode = DisplayMode.HEX;
-                break;
-            default:
-                currentDisplayMode = DisplayMode.BINARY;
-        }
-        return currentDisplayMode;
-    }
 
     UnitsMode switchUnitsMode(){
 

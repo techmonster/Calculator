@@ -5,11 +5,11 @@ package holloway.nate.calculator;
  */
  class LogicEngine {
     private State state;
-    private UserInterface ui;
+    private Controller ui;
 
     LogicEngine(){
         state = new State(State.Mode.CORE);
-        ui = new UserInterface();
+        ui = new Controller();
     }
 
     void start(){

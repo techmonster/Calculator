@@ -8,13 +8,12 @@ public class State {
     enum Mode{CORE, SCIENTIFIC, QUIT}
     Mode mode;
 
-    State(){
 
-    }
-
+    State(){}
     State(Mode mode){
         this.mode = mode;
     }
+
 
     Mode getStateValue(){
 

@@ -10,7 +10,7 @@ public class CalculatorTest {
 
     @Test
     public void addTest(){
-        CoreCalculator calculator = new CoreCalculator();
+        CoreCalculatorModel calculator = new CoreCalculatorModel();
         double actual = calculator.add(4,60);
         double expected = 64;
         Assert.assertSame("These two should be the same",expected,actual);
@@ -28,7 +28,7 @@ public class CalculatorTest {
 
     @Test
     public void subtractTest(){
-        CoreCalculator calculator = new CoreCalculator();
+        CoreCalculatorModel calculator = new CoreCalculatorModel();
         double actual = calculator.subtract(40,6);
         double expected = 34;
         Assert.assertSame("These two should be the same",expected,actual);

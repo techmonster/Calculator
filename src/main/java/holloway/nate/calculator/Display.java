@@ -5,7 +5,7 @@ package holloway.nate.calculator;
  */
 public class Display {
 
-    ScientificCalculator unitsMode = new ScientificCalculator();
+    ScientificCalculatorModel unitsMode = new ScientificCalculatorModel();
 
     public void print(String newString){
 
