@@ -8,8 +8,8 @@ public class CoreCalculator {
 
     String greeting = "Enter 'A' for addition, 'S' for subtraction" +
             " 'M' to multiply, 'D' to divide\n" +
-            "'T' to square a number, 'X' to calculate variable exponentiation, 'R' to find the root" +
-            ", 'I' for the inverse of the number displayed, and 'Q' to quit ";
+            "'T' to square a number, 'X' to calculate variable exponentiation, 'R' to find the root\n" +
+            ", 'I' for the inverse of the number displayed, 'C' to clear the screen, and 'Q' to quit ";
 
     public CoreCalculator(){
 
@@ -59,3 +59,6 @@ public class CoreCalculator {
     }
 
 }
+
+
+

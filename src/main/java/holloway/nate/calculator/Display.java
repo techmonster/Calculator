@@ -5,10 +5,27 @@ package holloway.nate.calculator;
  */
 public class Display {
 
+    ScientificCalculator unitsMode = new ScientificCalculator();
+
     public void print(String newString){
 
         System.out.println(newString);
     }
+
+    public void clearScreen(){
+
+        System.out.println("0");
+    }
+
+    public void changeTrigDisplay(){
+
+        unitsMode.switchUnitsMode();
+    }
+
+    public void changeTrigDisplay(String mode){
+        unitsMode.switchUnitsMode(mode);
+    }
+
 
 
 }
