@@ -1,10 +1,10 @@
 package holloway.nate.calculator;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Parser;
-
 /**
  * Created by nathanielholloway on 9/12/16.
+ * A model of the memory and methods to interact with it.
  */
+
 public class MemoryModel {
 
     private double displayValue;

@@ -2,6 +2,7 @@ package holloway.nate.calculator;
 
 /**
  * Created by nathanielholloway on 9/12/16.
+ * Responsible for starting program and checking continuation condition.
  */
  class LogicEngine {
     private State state;

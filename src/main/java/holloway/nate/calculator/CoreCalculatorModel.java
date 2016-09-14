@@ -2,6 +2,7 @@ package holloway.nate.calculator;
 
 /**
  * Created by nathanielholloway on 9/12/16.
+ * A model of the Core Calculator's characteristics and behaviour.
  */
 
 public class CoreCalculatorModel {

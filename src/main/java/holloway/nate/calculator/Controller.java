@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Created by nathanielholloway on 9/12/16.
- * The user interface for my calculator.
+ * The interface controller for my calculator.
  */
  class Controller {
     private Scanner sc;

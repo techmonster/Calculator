@@ -2,6 +2,8 @@ package holloway.nate.calculator;
 
 /**
  * Created by nathanielholloway on 9/12/16.
+ * A model of the Scientific Calculator's characteristics and behaviour.
+ * This also has the features of the Core Calculator.
  */
 public class ScientificCalculatorModel extends CoreCalculatorModel {
 
